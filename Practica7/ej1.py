@@ -14,6 +14,12 @@ class Nodo():
                 return
         self.vecinos.append(nodo)
 
+    def __str__(self):
+        return self.nombre 
+
+    def __repr__(self) -> str:
+        return self.nombre
+
 
 class Grafo():
     def __init__(self):
@@ -27,6 +33,7 @@ class Grafo():
         
         if nombreNodo1 in self.vertices:
             nodo1 = self.vertices[nombreNodo1]
+            
         
         else: 
             print("Error no existe el nodo1 con nombre: ", nombreNodo1)
@@ -34,6 +41,7 @@ class Grafo():
 
         if nombreNodo2 in self.vertices:
             nodo2 = self.vertices[nombreNodo2]
+            
         
         else: 
             print("Error no existe el nodo2 con nombre: ", nombreNodo2)
@@ -42,8 +50,8 @@ class Grafo():
         nodo1 = self.vertices[nombreNodo1]
         nodo2 = self.vertices[nombreNodo2]
 
-        nodo1.agregarVecino(nodo1)
-        nodo2.agregarVecino(nodo2)
+        nodo1.agregarVecino(nodo2)
+        nodo2.agregarVecino(nodo1)
 
     def bfs(self,nodoInicial):
         for u in self.vertices.values():
@@ -73,7 +81,20 @@ class Grafo():
             
             u.color = 'Negro'
 
+    def __str__(self):
+        s = ''
+        for v in self.vertices:
+            s += self.vertices[v].nombre + '-'
+            for i in self.vertices[v].vecinos:
+                s += i.nombre + ','
+            s += '\n'
+        return s
 
+    def __repr__(self):
+        s = ''
+        for v in self.vertices:
+            s += self.vertices[v].nombre + ','
+        return s
 
 g = Grafo()
 g.agregarVertice('1')
@@ -105,6 +126,8 @@ g.agregarArista('5','4')
 g.agregarArista('6','4')            
 
 g.bfs('1')
+g.bfs('2')
+print('Mi grafo es: \n', g)
 #cola = []
 #cola.append('a')
 
